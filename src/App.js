@@ -1,9 +1,9 @@
-// src/App.js
-import React, { useState } from 'react';
+// src/App.jsx
+import React, { useState, useEffect } from 'react';
 import * as d3 from 'd3';
 import './App.css';
 
-function App() {
+export default function App() {
   const [message, setMessage] = useState('');
   const [minutes, setMinutes] = useState(1);
 
@@ -15,48 +15,58 @@ function App() {
         body: JSON.stringify({ minutes, dt: 1.0, capture_rate: 5 })
       });
       const data = await res.json();
-      setMessage(JSON.stringify(data));
-    } catch (err) {
+      setMessage(JSON.stringify(data, null, 2));
+    } catch {
       setMessage('Error running wargame simulation');
     }
   };
 
   const runCAD = async () => {
     try {
-      const res = await fetch('/run_cad_upgrade', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' }
-      });
+      const res = await fetch('/run_cad_upgrade', { method: 'POST' });
       const data = await res.json();
-      setMessage(JSON.stringify(data));
-    } catch (err) {
+      setMessage(JSON.stringify(data, null, 2));
+    } catch {
       setMessage('Error running J-20 PL-15 CAD upgrade simulation');
     }
   };
 
-  console.log('Using D3 version:', d3.version);
+  useEffect(() => {
+    // eslint-disable-next-line no-console
+    console.log('Using D3 version:', d3.version);
+  }, []);
 
   return (
-    <div style={{ padding: '1em', fontFamily: 'sans-serif', color: '#eee' }}>
+    <div style={{ padding: '1em' }}>
       <h1>PLA Advanced Simulation UI</h1>
-      <div style={{ marginBottom: '1em' }}>
-        <label>Minutes to run the wargame: </label>
+
+      <label>
+        Minutes to run the wargame:&nbsp;
         <input
           type="number"
+          min="1"
           value={minutes}
-          onChange={e => setMinutes(parseInt(e.target.value, 10))}
+          onChange={e => setMinutes(+e.target.value)}
         />
-        <button onClick={runWargame}>Run Wargame</button>
-        <button onClick={runCAD}>Run J-20 PL-15 CAD Upgrade</button>
-      </div>
-      <div>
-        <h2>Output</h2>
-        <pre style={{ background: '#333', padding: '1em', borderRadius: '4px' }}>
-          {message}
-        </pre>
-      </div>
+      </label>
+      <button onClick={runWargame} style={{ marginLeft: '0.5em' }}>
+        Run Wargame
+      </button>
+      <button onClick={runCAD} style={{ marginLeft: '0.5em' }}>
+        Run J-20 PL-15 CAD Upgrade
+      </button>
+
+      <h2>Output</h2>
+      <pre
+        style={{
+          background: '#333',
+          padding: '1em',
+          borderRadius: 4,
+          whiteSpace: 'pre-wrap'
+        }}
+      >
+        {message || 'Awaiting results…'}
+      </pre>
     </div>
   );
 }
-
-export default App;

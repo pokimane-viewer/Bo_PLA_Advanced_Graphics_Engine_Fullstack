@@ -1,13 +1,11 @@
-// src/Advanced3DScene.js
-// Example of a separate advanced 3D visualization component using three and react-three-fiber
-
+// src/Advanced3DScene.jsx
 import React from 'react';
 import { Canvas } from '@react-three/fiber';
 
 function Box() {
   return (
-    <mesh rotation={[10, 10, 0]}>
-      <boxBufferGeometry args={[1, 1, 1]} />
+    <mesh rotation={[0.5, 0.5, 0]}>
+      <boxGeometry args={[1, 1, 1]} />
       <meshStandardMaterial color="orange" />
     </mesh>
   );
@@ -15,10 +13,10 @@ function Box() {
 
 export default function Advanced3DScene() {
   return (
-    <div style={{ width: '600px', height: '400px' }}>
+    <div style={{ width: 600, height: 400 }}>
       <h2>3D Scene Visualization</h2>
       <Canvas>
-        <ambientLight />
+        <ambientLight intensity={0.5} />
         <pointLight position={[10, 10, 10]} />
         <Box />
       </Canvas>

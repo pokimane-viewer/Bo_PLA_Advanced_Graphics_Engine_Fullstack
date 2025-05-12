@@ -10,3 +10,5 @@ openai
 opencv-python
 opencv-python-headless
 bcrypt
+cython
+graphql

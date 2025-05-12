@@ -1,4 +1,9 @@
-Usage & Notes
+ python.exe -m pip uninstall -y graphql
+ python.exe -m pip install --upgrade pip setuptools whee
+ python.exe -m pip install "graphql-core>=3.2"
+
+
+
 Install Dependencies
 
 bash

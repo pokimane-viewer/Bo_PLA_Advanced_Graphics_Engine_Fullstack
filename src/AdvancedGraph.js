@@ -1,52 +1,38 @@
-// src/AdvancedGraph.js
-// Example of a separate advanced visualization component using react-d3-graph
-
+// src/AdvancedGraph.jsx
 import React from 'react';
 import { Graph } from 'react-d3-graph';
 
 const data = {
-  nodes: [{ id: 'PLA HQ' }, { id: 'Frontline Unit' }, { id: 'Support Unit' }],
+  nodes: [
+    { id: 'PLA HQ' },
+    { id: 'Frontline Unit' },
+    { id: 'Support Unit' }
+  ],
   links: [
     { source: 'PLA HQ', target: 'Frontline Unit' },
-    { source: 'PLA HQ', target: 'Support Unit' },
-  ],
+    { source: 'PLA HQ', target: 'Support Unit' }
+  ]
 };
 
-const myConfig = {
+const config = {
   nodeHighlightBehavior: true,
-  node: {
-    color: 'red',
-    size: 200,
-    highlightStrokeColor: 'blue',
-  },
-  link: {
-    highlightColor: 'lightblue',
-  },
+  node: { color: 'red', size: 200, highlightStrokeColor: 'blue' },
+  link: { highlightColor: 'lightblue' },
   width: 600,
-  height: 400,
+  height: 400
 };
 
-function AdvancedGraph() {
-  const onClickNode = function(nodeId) {
-    alert(`Clicked node ${nodeId}`);
-  };
-
-  const onClickLink = function(source, target) {
-    alert(`Clicked link between ${source} and ${target}`);
-  };
-
+export default function AdvancedGraph() {
   return (
     <div style={{ margin: '1em' }}>
       <h2>Advanced D3 Graph</h2>
       <Graph
-        id="d3-graph"
+        id="pla-graph"
         data={data}
-        config={myConfig}
-        onClickNode={onClickNode}
-        onClickLink={onClickLink}
+        config={config}
+        onClickNode={id => alert(`Clicked node ${id}`)}
+        onClickLink={(s, t) => alert(`Clicked link between ${s} and ${t}`)}
       />
     </div>
   );
 }
-
-export default AdvancedGraph;
