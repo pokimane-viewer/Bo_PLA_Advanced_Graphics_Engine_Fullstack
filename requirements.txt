@@ -1,0 +1,12 @@
+# requirements.txt
+# Include all necessary modern libraries for the AI, GPU, and CV pipelines
+
+Django
+channels
+channels-redis
+graphene-django
+strawberry-graphql
+openai
+opencv-python
+opencv-python-headless
+bcrypt
