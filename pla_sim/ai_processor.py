@@ -1,7 +1,7 @@
 # pla_sim/ai_processor.py
 # (Original content, unmodified in logic, with appended PyTorch/OpenCV code for J-20 PL-15 CAD upgrade plan.)
 
-import tensorflow as tf
+
 import numpy as np
 
 def get_beautiful_things(num_items=5):
